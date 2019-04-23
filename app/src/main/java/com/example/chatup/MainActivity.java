@@ -3,6 +3,8 @@ package com.example.chatup;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chatup.adapter.ChatListAdapter;
 import com.example.chatup.model.Messaggio;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     //UI
     private EditText mInputText;
     private Button mBtnSend;
+
+    private ChatListAdapter chatListAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onStart() {
@@ -52,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         //Inizializzo l'UI
         initUI();
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        chatListAdapter = new ChatListAdapter(this, mDatabaseReference, mAuth.getCurrentUser().getDisplayName());
+        recyclerView.setAdapter(chatListAdapter);
+
         //Estraggo gli extras
         Bundle intent_login = getIntent().getExtras();
         String email = intent_login.getString("login_data");
@@ -63,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         mInputText = findViewById(R.id.et_msg);
         mBtnSend = findViewById(R.id.btn_send);
+
+        recyclerView = (RecyclerView) findViewById(R.id.list_chat);
 
         mInputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -128,5 +142,12 @@ public class MainActivity extends AppCompatActivity {
             mDatabaseReference.child("messaggi").push().setValue(chat);
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        chatListAdapter.clean();
     }
 }
