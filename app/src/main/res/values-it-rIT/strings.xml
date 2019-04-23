@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Schermata principale</string>
+    <string name="small_phrase_login">Non sei registrato?</string>
+    <string name="subtitle_register">e potrai chattare con il mondo...</string>
+    <string name="register_phrase">Registrati</string>
+    <string name="register_btn">REGISTRATI</string>
+    <string name="small_phrase_register">Già registrato?</string>
+    <string name="login_phrase">Accedi</string>
+    <string name="btn_login">ACCEDI</string>
+    <string name="conferma_password">Conferma password</string>
+    <string name="login_succes">Autenticazione avvenuta con successo!</string>
+    <string name="login_error">Errore di autenticazione!</string>
+    <string name="welcome_toast">Benvenuto!</string>
+    <string name="hint_name">Nome utente</string>
+</resources>

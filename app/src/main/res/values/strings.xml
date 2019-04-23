@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name" translatable="false">ChatUP</string>
+    <string name="hint_name">Username</string>
+    <string name="hint_psw" translatable="false">Password</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="small_phrase_login">Are you not registered?</string>
+    <string name="small_phrase_register">Already registered?</string>
+    <string name="login_phrase">Login</string>
+    <string name="register_phrase">Sign In</string>
+    <string name="register_btn">SIGN IN</string>
+    <string name="welcome">Main screen</string>
+    <string name="subtitle_register">and you will able to chat with the world...</string>
+
+    <string name="SplashText" translatable="false">ChatUP</string>
+    <string name="conferma_password">Confirm password</string>
+    <string name="email" translatable="false">Email</string>
+
+    <string name="login_succes">Authentication successful!</string>
+    <string name="login_error">Authentication error!</string>
+
+    <string name="welcome_toast">Welcome!</string>
+</resources>

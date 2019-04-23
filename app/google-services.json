@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "888582334776",
+    "firebase_url": "https://chatuplogin-a6213.firebaseio.com",
+    "project_id": "chatuplogin-a6213",
+    "storage_bucket": "chatuplogin-a6213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888582334776:android:f77860df076d3a12",
+        "android_client_info": {
+          "package_name": "com.example.chatuplogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888582334776-7rk7i9nfcbofpslk4lqhbh88n98lsvr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatuplogin",
+            "certificate_hash": "8c78748a86f28171bc92c358bac26c58e0ae6b6c"
+          }
+        },
+        {
+          "client_id": "888582334776-cg7h951mio3o3trg5mi0b6sovmvto9c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvrQtvDKldggfoNk4MMxSLacgxIzEJyc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888582334776-cg7h951mio3o3trg5mi0b6sovmvto9c3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
