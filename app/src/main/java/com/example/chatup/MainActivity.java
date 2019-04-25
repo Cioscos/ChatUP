@@ -50,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //Imposto il titolo
-        setTitle(mAuth.getCurrentUser().getDisplayName());
+        if(mAuth.getCurrentUser() != null)
+            setTitle(mAuth.getCurrentUser().getDisplayName());
+        else
+            setTitle("unknown");
 
         //Collego l'app al DB Firebase
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
