@@ -89,7 +89,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         LayoutInflater inflater = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.chat_msg_row, null, false);
+        View v = inflater.inflate(R.layout.chat_msg_row, viewGroup, false);
         ChatViewHolder vh = new ChatViewHolder(v);
 
         return vh;
@@ -111,14 +111,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
     private void setChatItemStyle(Boolean mineMsg, ChatViewHolder holder) {
 
         if (mineMsg) {
-            holder.autore.setGravity(Gravity.END);
-            holder.messaggio.setGravity(Gravity.END);
-            holder.messaggio.setTextAlignment(TextView.TEXT_ALIGNMENT_TEXT_END);
+            holder.params.gravity = Gravity.END;
             holder.autore.setTextColor(Color.BLUE);
+            holder.messaggio.setBackgroundResource(R.drawable.in_msg_bg);
         } else {
             holder.autore.setTextColor(Color.MAGENTA);
+            holder.messaggio.setBackgroundResource(R.drawable.out_msg_bg);
         }
-
+        holder.autore.setLayoutParams(holder.params);
+        holder.messaggio.setLayoutParams(holder.params);
     }
 
     @Override
