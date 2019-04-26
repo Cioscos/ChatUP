@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.chatup.adapter.ChatListAdapter;
 import com.example.chatup.model.Messaggio;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ChatListAdapter chatListAdapter;
     private RecyclerView recyclerView;
+
+    private AdView mAdView;
 
     @Override
     protected void onStart() {
@@ -71,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         Bundle intent_login = getIntent().getExtras();
         String email = intent_login.getString("login_data");
 
+        //Carico le pubblicità
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         //Mostro i dati
         Toast.makeText(this, "Accesso effettuato come:\n" + email, Toast.LENGTH_SHORT).show();
     }
@@ -78,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         mInputText = findViewById(R.id.et_msg);
         mBtnSend = findViewById(R.id.btn_send);
+        mAdView = findViewById(R.id.adView);
 
         recyclerView = (RecyclerView) findViewById(R.id.list_chat);
 

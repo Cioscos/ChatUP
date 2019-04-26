@@ -20,5 +20,6 @@
 
     <string name="welcome_toast">Welcome!</string>
 
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="AdMob_app_id" translatable="false">ca-app-pub-1512967603789756~3077271787</string>
+    <string name="chatup_banner_ad" translatable="false">ca-app-pub-1512967603789756/4468522303</string>
 </resources>
