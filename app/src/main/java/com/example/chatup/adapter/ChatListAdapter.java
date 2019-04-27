@@ -1,7 +1,9 @@
 package com.example.chatup.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.print.PrintAttributes;
 import android.support.annotation.NonNull;
@@ -82,6 +84,23 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
             autore = itemView.findViewById(R.id.tv_autore);
             messaggio = itemView.findViewById(R.id.tv_messaggio);
             params = (LinearLayout.LayoutParams) autore.getLayoutParams();
+
+            messaggio.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    String [] opzioni = new String[2];
+                    opzioni[0] = "Elimina messaggio";
+
+                    new AlertDialog.Builder(v.getContext())
+                            .setItems(opzioni, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //TODO: Completa le azioni da svolgere
+                                }
+                            });
+                    return false;
+                }
+            });
         }
     }
 

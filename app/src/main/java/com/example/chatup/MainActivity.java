@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         //Mostro i dati
         Toast.makeText(this, "Accesso effettuato come:\n" + email, Toast.LENGTH_SHORT).show();
 
-
     }
 
     @Override
