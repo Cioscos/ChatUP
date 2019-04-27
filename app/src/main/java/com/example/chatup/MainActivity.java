@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private AdView mAdView;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
         //Carico le pubblicità
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-        //Apro il riferimento alle shared preferences
-        sharedPreferences = this.getSharedPreferences("com.example.chatup", Context.MODE_PRIVATE);
 
         //Mostro i dati
         Toast.makeText(this, "Accesso effettuato come:\n" + email, Toast.LENGTH_SHORT).show();
@@ -174,8 +170,6 @@ public class MainActivity extends AppCompatActivity {
             });
             //Salvo il messaggio nel DB
             mDatabaseReference.child("messaggi").push().setValue(chat);
-            //Salvo il numero dei messaggi nelle shared preferences
-            sharedPreferences.edit().putInt("n_msg", chatListAdapter.getItemCount()).apply();
         }
     }
 
