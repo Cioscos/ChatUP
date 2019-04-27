@@ -3,6 +3,7 @@ package com.example.chatup.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.print.PrintAttributes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -114,8 +115,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
             holder.params.gravity = Gravity.END;
             holder.autore.setTextColor(Color.BLUE);
             holder.messaggio.setBackgroundResource(R.drawable.in_msg_bg);
+            holder.params.setMarginEnd(10);
         } else {
             holder.params.gravity = Gravity.START;
+            holder.params.setMarginStart(10);
             holder.autore.setTextColor(Color.MAGENTA);
             holder.messaggio.setBackgroundResource(R.drawable.out_msg_bg);
         }

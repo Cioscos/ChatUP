@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class SplashScreen extends AppCompatActivity{
 
     private String email;
-    static final int SECOND_DELAY = 2;
+    static final int SECOND_DELAY = 1;
 
     private boolean updateUI() {
 

@@ -1,6 +1,8 @@
 package com.example.chatup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "main_activity";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
 
@@ -37,13 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private AdView mAdView;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        updateUI();
-    }
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         initUI();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         chatListAdapter = new ChatListAdapter(this, mDatabaseReference, mAuth.getCurrentUser().getDisplayName());
@@ -79,16 +77,27 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        //Apro il riferimento alle shared preferences
+        sharedPreferences = this.getSharedPreferences("com.example.chatup", Context.MODE_PRIVATE);
+
         //Mostro i dati
         Toast.makeText(this, "Accesso effettuato come:\n" + email, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        updateUI();
     }
 
     private void initUI() {
         mInputText = findViewById(R.id.et_msg);
         mBtnSend = findViewById(R.id.btn_send);
         mAdView = findViewById(R.id.adView);
-
-        recyclerView = (RecyclerView) findViewById(R.id.list_chat);
+        recyclerView = findViewById(R.id.list_chat);
 
         mInputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -119,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Impostazioni menù
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -143,17 +153,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage() {
-        Log.i("chatup","Invio messaggio");
+        Log.i("chatup", "Invio messaggio");
         String inputMsg = mInputText.getText().toString();
 
-        if(!inputMsg.equals("")) {
+        if (inputMsg.equals("")) {
 
+            Toast.makeText(this, "Inserisci prima del testo", Toast.LENGTH_SHORT).show();
+        }else if(!chekInputMsg(inputMsg)) {
+
+            mInputText.setText("");
+        } else {
             Messaggio chat = new Messaggio(inputMsg, mAuth.getCurrentUser().getDisplayName());
 
+            //Scroll down della chat quando invio un messaggio
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.smoothScrollToPosition(chatListAdapter.getItemCount());
+                }
+            });
             //Salvo il messaggio nel DB
             mDatabaseReference.child("messaggi").push().setValue(chat);
+            //Salvo il numero dei messaggi nelle shared preferences
+            sharedPreferences.edit().putInt("n_msg", chatListAdapter.getItemCount()).apply();
         }
+    }
 
+    private boolean chekInputMsg(String input) {
+
+        for(int i = 0; i < input.length(); ++i) {
+            if(input.trim().length() > 0)
+                return true;
+            else
+                return false;
+        }
+        return false;
     }
 
     @Override
